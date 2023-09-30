@@ -18,6 +18,10 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         self.view.backgroundColor = .blue
         self.view.addSubview(tableView)
         self.title = "Pokemons"
+        self.setupConstraints()
+
+    }
+    func setupConstraints() {
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
