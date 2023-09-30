@@ -15,6 +15,7 @@
 		9268A1842AC811E4007C2D46 /* PokemonAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9268A1832AC811E4007C2D46 /* PokemonAppUITestsLaunchTests.swift */; };
 		9277A0852AC814640016531D /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9277A0842AC814640016531D /* MainViewController.swift */; };
 		9277A0902AC81FD00016531D /* MainViewController+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9277A08F2AC81FD00016531D /* MainViewController+TableView.swift */; };
+		9277A0922AC826950016531D /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9277A0912AC826950016531D /* MainViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		9268A1832AC811E4007C2D46 /* PokemonAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		9277A0842AC814640016531D /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		9277A08F2AC81FD00016531D /* MainViewController+TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainViewController+TableView.swift"; sourceTree = "<group>"; };
+		9277A0912AC826950016531D /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,6 +194,7 @@
 		9277A08E2AC818C10016531D /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				9277A0912AC826950016531D /* MainViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -329,6 +332,7 @@
 				9268A1612AC811E1007C2D46 /* AppDelegate.swift in Sources */,
 				9277A0902AC81FD00016531D /* MainViewController+TableView.swift in Sources */,
 				9277A0852AC814640016531D /* MainViewController.swift in Sources */,
+				9277A0922AC826950016531D /* MainViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
