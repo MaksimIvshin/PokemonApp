@@ -20,8 +20,6 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         self.title = "Pokemons"
         self.setupConstraints()
     }
-    
-
 
     func setupIndicator() {
         self.view.addSubview(activityIndicator)
@@ -40,7 +38,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func registerCells() {
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(MainPokemonCell.self, forCellReuseIdentifier: MainPokemonCell.indetifier)
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -52,8 +50,11 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = self.cellDataSourse[indexPath.row].name
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: MainPokemonCell.indetifier, for: indexPath) as? MainPokemonCell else {
+            return UITableViewCell()
+        }
+        let cellViewModel = cellDataSourse[indexPath.row]
+        cell.setupCell(viewModel: cellViewModel)
         return cell
     }
 
@@ -61,5 +62,9 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
+    }
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        150
     }
 }

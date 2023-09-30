@@ -10,7 +10,7 @@ import Foundation
 class MainViewModel {
 
     var isLoanding: Observable<Bool> = Observable(false)
-    var cellDataSourse: Observable<[Pokemon]> = Observable(nil)
+    var cellDataSourse: Observable<[PokemonTableCellViewModel]> = Observable(nil)
     var dataSource: PokemonPage?
 
     func numberOfSection() -> Int {
@@ -30,7 +30,6 @@ class MainViewModel {
             self?.isLoanding.value = false
             switch result {
             case .success(let data):
-                print("Pokemons \(data.results.first?.url)")
                 self?.dataSource = data
                 self?.mapCellData()
             case .failure(let error):
@@ -40,6 +39,12 @@ class MainViewModel {
     }
 
     func mapCellData() {
-        self.cellDataSourse.value = self.dataSource?.results ?? []
+        self.cellDataSourse.value = self.dataSource?.results.compactMap({ PokemonTableCellViewModel(pokemon: $0)
+        })
+    }
+
+    func getPokemonTitle(_ pokemon: PokemonTableCellViewModel) -> String {
+        return pokemon.title
+
     }
 }

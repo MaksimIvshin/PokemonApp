@@ -27,7 +27,7 @@ class MainViewController: UIViewController {
 
     var viewModel: MainViewModel = MainViewModel()
 
-    var cellDataSourse: [Pokemon] = []
+    var cellDataSourse: [PokemonTableCellViewModel] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
