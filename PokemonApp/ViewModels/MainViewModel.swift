@@ -45,6 +45,5 @@ class MainViewModel {
 
     func getPokemonTitle(_ pokemon: PokemonTableCellViewModel) -> String {
         return pokemon.title
-
     }
 }
