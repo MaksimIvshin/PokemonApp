@@ -19,8 +19,18 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         self.view.addSubview(tableView)
         self.title = "Pokemons"
         self.setupConstraints()
-
     }
+    
+
+
+    func setupIndicator() {
+        self.view.addSubview(activityIndicator)
+
+        NSLayoutConstraint.activate([
+            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)])
+    }
+
     func setupConstraints() {
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -43,7 +53,13 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = "\(indexPath.row)"
+        cell.textLabel?.text = self.cellDataSourse[indexPath.row].name
         return cell
+    }
+
+    func reloadTableView(){
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
 }
