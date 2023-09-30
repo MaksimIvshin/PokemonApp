@@ -15,7 +15,7 @@ enum NetworkError: Error {
 
 public class APICaller {
     static func getPokemons(compltitionHandler: @escaping (_ result: Result<PokemonPage, NetworkError>) -> Void) {
-        let urlString = "https://pokeapi.co/api/v2/pokemon"
+        let urlString = NetworkingConstant.shared.serverAdress
         guard let url = URL(string: urlString) else {
             compltitionHandler(.failure(.urlError))
             return
