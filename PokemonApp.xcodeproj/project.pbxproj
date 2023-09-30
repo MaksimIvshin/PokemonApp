@@ -13,6 +13,9 @@
 		9268A1782AC811E4007C2D46 /* PokemonAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9268A1772AC811E4007C2D46 /* PokemonAppTests.swift */; };
 		9268A1822AC811E4007C2D46 /* PokemonAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9268A1812AC811E4007C2D46 /* PokemonAppUITests.swift */; };
 		9268A1842AC811E4007C2D46 /* PokemonAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9268A1832AC811E4007C2D46 /* PokemonAppUITestsLaunchTests.swift */; };
+		92732B0A2AC86BB500B22C0D /* APICaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92732B092AC86BB500B22C0D /* APICaller.swift */; };
+		92732B0C2AC86C0B00B22C0D /* PokemonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92732B0B2AC86C0B00B22C0D /* PokemonModel.swift */; };
+		92732B0E2AC8743E00B22C0D /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92732B0D2AC8743E00B22C0D /* Observable.swift */; };
 		9277A0852AC814640016531D /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9277A0842AC814640016531D /* MainViewController.swift */; };
 		9277A0902AC81FD00016531D /* MainViewController+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9277A08F2AC81FD00016531D /* MainViewController+TableView.swift */; };
 		9277A0922AC826950016531D /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9277A0912AC826950016531D /* MainViewModel.swift */; };
@@ -46,6 +49,9 @@
 		9268A17D2AC811E4007C2D46 /* PokemonAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PokemonAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9268A1812AC811E4007C2D46 /* PokemonAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonAppUITests.swift; sourceTree = "<group>"; };
 		9268A1832AC811E4007C2D46 /* PokemonAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		92732B092AC86BB500B22C0D /* APICaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICaller.swift; sourceTree = "<group>"; };
+		92732B0B2AC86C0B00B22C0D /* PokemonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonModel.swift; sourceTree = "<group>"; };
+		92732B0D2AC8743E00B22C0D /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		9277A0842AC814640016531D /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		9277A08F2AC81FD00016531D /* MainViewController+TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainViewController+TableView.swift"; sourceTree = "<group>"; };
 		9277A0912AC826950016531D /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
@@ -150,6 +156,7 @@
 		9277A0882AC8185E0016531D /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				92732B0B2AC86C0B00B22C0D /* PokemonModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -165,6 +172,7 @@
 		9277A08A2AC818810016531D /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				92732B0D2AC8743E00B22C0D /* Observable.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -179,6 +187,7 @@
 		9277A08C2AC8189D0016531D /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				92732B092AC86BB500B22C0D /* APICaller.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -330,8 +339,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				9268A1612AC811E1007C2D46 /* AppDelegate.swift in Sources */,
+				92732B0C2AC86C0B00B22C0D /* PokemonModel.swift in Sources */,
 				9277A0902AC81FD00016531D /* MainViewController+TableView.swift in Sources */,
+				92732B0E2AC8743E00B22C0D /* Observable.swift in Sources */,
 				9277A0852AC814640016531D /* MainViewController.swift in Sources */,
+				92732B0A2AC86BB500B22C0D /* APICaller.swift in Sources */,
 				9277A0922AC826950016531D /* MainViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

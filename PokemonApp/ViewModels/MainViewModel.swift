@@ -15,4 +15,15 @@ class MainViewModel {
     func numberOfRows(in section: Int) -> Int {
         10
     }
+
+    func getData() {
+        APICaller.getPokemons { result in
+            switch result {
+            case .success(let data):
+                print("Pokemons \(data.results.first?.url)")
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
 }
