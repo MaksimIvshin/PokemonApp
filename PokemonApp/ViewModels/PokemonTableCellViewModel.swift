@@ -23,13 +23,11 @@ class PokemonTableCellViewModel {
         }
     }
 
-
     func makeImageURL(pokemonIndex: Int) -> URL? {
-        let baseURLString = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"
+        let baseURLString = NetworkingConstant.shared.imageServerAdress
         let imageURLString = baseURLString + "\(pokemonIndex).png"
         return URL(string: imageURLString)
     }
-
 
     func getIndexFromURL(_ urlString: String) -> Int? {
           guard let url = URL(string: urlString),
@@ -46,7 +44,6 @@ class PokemonTableCellViewModel {
             completion(nil)
             return
         }
-
         DispatchQueue.global().async {
             if let data = try? Data(contentsOf: imageURL),
                 let image = UIImage(data: data) {
@@ -57,6 +54,4 @@ class PokemonTableCellViewModel {
             }
         }
     }
-
-
 }

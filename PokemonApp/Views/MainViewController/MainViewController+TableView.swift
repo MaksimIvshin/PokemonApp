@@ -15,21 +15,18 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.backgroundColor = .clear
-        self.view.backgroundColor = .blue
+        self.tableView.separatorStyle = .none
+        self.view.backgroundColor = .systemBackground
         self.view.addSubview(tableView)
         self.title = "Pokemons"
+        self.view.addSubview(activityIndicator)
         self.setupConstraints()
     }
 
-    func setupIndicator() {
-        self.view.addSubview(activityIndicator)
-
+    func setupConstraints() {
         NSLayoutConstraint.activate([
             activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)])
-    }
-
-    func setupConstraints() {
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
@@ -50,11 +47,13 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: MainPokemonCell.indetifier, for: indexPath) as? MainPokemonCell else {
-            return UITableViewCell()
+        guard let cell = tableView.dequeueReusableCell(withIdentifier:
+        MainPokemonCell.indetifier, for: indexPath) as? MainPokemonCell else {
+        return UITableViewCell()
         }
         let cellViewModel = cellDataSourse[indexPath.row]
         cell.setupCell(viewModel: cellViewModel)
+        cell.selectionStyle = .none
         return cell
     }
 
@@ -65,6 +64,11 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        150
+        70
     }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        viewModel.getDetailData(for: indexPath.row)
+    }
+
 }
