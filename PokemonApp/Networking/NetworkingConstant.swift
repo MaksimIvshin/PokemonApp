@@ -13,7 +13,7 @@ class NetworkingConstant {
 
     public var serverAdress: String {
         get {
-            return "https://pokeapi.co/api/v2/pokemon"
+            return "https://pokeapi.co/api/v2/pokemon/"
         }
     }
     public var imageServerAdress: String {
