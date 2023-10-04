@@ -34,7 +34,7 @@ class MainViewController: UIViewController {
         viewModel.getData()
     }
     
-    private func configView() {
+    func configView() {
         setupTableView()
     }
 

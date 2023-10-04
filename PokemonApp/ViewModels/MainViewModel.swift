@@ -15,6 +15,7 @@ class MainViewModel {
     var cellDataSourse: Observable<[PokemonTableCellViewModel]> = Observable(nil)
     var dataSource: PokemonPage?
     var detailPokemon: PokemonSelected?
+    var details: DetailsPokemonViewModel?
 
     func numberOfSection() -> Int {
         1
@@ -25,32 +26,32 @@ class MainViewModel {
     }
 
     func getData() {
-        if isLoanding.value ?? true { return }
-        isLoanding.value = true
-        APICaller.getPokemons { [weak self] result in
-            self?.isLoanding.value = false
-            switch result {
-            case .success(let data):
-                self?.dataSource = data
-                self?.mapCellData()
-            case .failure(let error):
-                print(error)
+            if isLoanding.value ?? true { return }
+            isLoanding.value = true
+            APICaller.getPokemons { [weak self] result in
+                self?.isLoanding.value = false
+                switch result {
+                case .success(let data):
+                    self?.dataSource = data
+                    self?.mapCellData()
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
             }
         }
-    }
 
     func getDetailData(for index: Int) {
         if isLoandingDetails.value ?? true { return }
         self.isDetailsLoaded.value = false
         isLoandingDetails.value = true
-        APICaller.getDetailPokemon(url: "https://pokeapi.co/api/v2/pokemon/\(index + 1)/") { [weak self] result in
+        APICaller.getDetailPokemon(url: "\(NetworkingConstant.shared.serverAdress)\(index + 1)/") { [weak self] result in
             self?.isLoandingDetails.value = false
             switch result {
             case .success(let data):
                 self?.detailPokemon = data
                 self?.isDetailsLoaded.value = true
             case .failure(let error):
-                print(error)
+                print(error.localizedDescription)
             }
         }
     }

@@ -11,23 +11,23 @@ import UIKit
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
 
     func setupTableView() {
-        self.registerCells()
-        self.tableView.delegate = self
-        self.tableView.dataSource = self
-        self.tableView.backgroundColor = .clear
-        self.tableView.separatorStyle = .none
-        self.view.backgroundColor = .systemBackground
-        self.view.addSubview(tableView)
-        self.title = "Pokemons"
-        self.view.addSubview(activityIndicator)
-        self.setupConstraints()
+        registerCells()
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.backgroundColor = .clear
+        tableView.separatorStyle = .none
+        view.backgroundColor = .systemBackground
+        view.addSubview(tableView)
+        title = "Pokemons"
+        view.addSubview(activityIndicator)
+        setupConstraints()
     }
 
-    func setupConstraints() {
+    private func setupConstraints() {
         NSLayoutConstraint.activate([
             activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)])
-        NSLayoutConstraint.activate([
+            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
@@ -58,9 +58,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func reloadTableView(){
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
+        tableView.reloadData()
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -70,5 +68,4 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         viewModel.getDetailData(for: indexPath.row)
     }
-
 }

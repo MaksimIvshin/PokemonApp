@@ -13,6 +13,7 @@ class DetailsPokemonViewModel {
     var detailPokemon: PokemonSelected
     var pokemonImage: URL?
     var pokemonHeight: Int
+    var pokemonName: String
     var pokemonWeight: Int
     var pokemonType: String
     var species: String?
@@ -21,6 +22,7 @@ class DetailsPokemonViewModel {
 
     init(detailPokemon: PokemonSelected) {
         self.detailPokemon = detailPokemon
+        self.pokemonName = detailPokemon.name
         self.pokemonHeight = detailPokemon.height
         self.pokemonWeight = detailPokemon.weight
         self.pokemonType = detailPokemon.types.first?.type.name ?? ""
@@ -32,7 +34,6 @@ class DetailsPokemonViewModel {
         guard let imageURLString = detailPokemon.sprites.front_default else {
             return nil
         }
-        print(imageURLString)
         return URL(string: imageURLString)
     }
 
@@ -57,4 +58,3 @@ class DetailsPokemonViewModel {
         }
     }
 }
-

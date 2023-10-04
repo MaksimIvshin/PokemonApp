@@ -9,32 +9,38 @@ import UIKit
 
 class DetailsPokemonViewController: UIViewController {
 
-    lazy var imageViewForPokemon: UIImageView = {
+   private lazy var imageViewForPokemon: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
 
-    lazy var pokemonHeight: UILabel = {
+    private lazy var pokemonName: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
-    lazy var pokemonType: UILabel = {
+    private lazy var pokemonHeight: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
-    lazy var pokemonWeight: UILabel = {
+    private lazy var pokemonType: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+
+    private lazy var pokemonWeight: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
     //viewModel
-    var detailsViewModel: DetailsPokemonViewModel
+    private var detailsViewModel: DetailsPokemonViewModel
 
     init(viewModel: DetailsPokemonViewModel) {
         self.detailsViewModel = viewModel
@@ -53,11 +59,12 @@ class DetailsPokemonViewController: UIViewController {
         view.backgroundColor = .white
     }
 
-    func configView () {
+    private func configView () {
         self.title = "Pokemon details"
-        pokemonHeight.text = "\(detailsViewModel.pokemonHeight) ft"
-        pokemonWeight.text = "\(detailsViewModel.pokemonWeight) kg"
-        pokemonType.text = "\(detailsViewModel.pokemonType.capitalized)"
+        pokemonName.text = detailsViewModel.pokemonName.capitalized
+        pokemonHeight.text = "\(detailsViewModel.pokemonHeight.decimeterToCentimeter())"
+        pokemonWeight.text = "\(detailsViewModel.pokemonWeight.hectogramToKilogram())"
+        pokemonType.text = "\(detailsViewModel.pokemonType.capitalized) type"
         detailsViewModel.loadImage { [weak self] image in
             DispatchQueue.main.async {
                 self?.imageViewForPokemon.image = image
@@ -65,32 +72,31 @@ class DetailsPokemonViewController: UIViewController {
         }
     }
 
-    func addViews() {
+    private func addViews() {
         view.addSubview(imageViewForPokemon)
         view.addSubview(pokemonHeight)
         view.addSubview(pokemonWeight)
         view.addSubview(pokemonType)
+        view.addSubview(pokemonName)
     }
 }
 
 extension DetailsPokemonViewController {
-    func setupConstraints() {
-
+    private func setupConstraints() {
         NSLayoutConstraint.activate([
-            imageViewForPokemon.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 100),
+            pokemonName.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 100),
+            pokemonName.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            imageViewForPokemon.topAnchor.constraint(equalTo: pokemonName.bottomAnchor, constant: 10),
             imageViewForPokemon.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             imageViewForPokemon.widthAnchor.constraint(equalToConstant: 200),
             imageViewForPokemon.heightAnchor.constraint(equalToConstant: 200),
-            
             pokemonHeight.topAnchor.constraint(equalTo: imageViewForPokemon.bottomAnchor, constant: 10),
             pokemonHeight.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-
-            pokemonType.topAnchor.constraint(equalTo: pokemonHeight.bottomAnchor, constant: 10),
-            pokemonType.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-
-            pokemonWeight.topAnchor.constraint(equalTo: pokemonType.bottomAnchor, constant: 10),
+            pokemonWeight.topAnchor.constraint(equalTo: pokemonHeight.bottomAnchor, constant: 10),
             pokemonWeight.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            pokemonWeight.bottomAnchor.constraint(lessThanOrEqualTo: view.bottomAnchor, constant: -10)
+            pokemonType.topAnchor.constraint(equalTo: pokemonWeight.bottomAnchor, constant: 10),
+            pokemonType.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            pokemonType.bottomAnchor.constraint(lessThanOrEqualTo: view.bottomAnchor, constant: -10)
         ])
     }
 }
