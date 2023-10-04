@@ -10,17 +10,17 @@ import Foundation
 import UIKit
 
 class LocalFileManager {
-
     static let shared = LocalFileManager()
-    private init() { }
+    private let folderName = "Data"
 
-    func saveImage(image: UIImage, imageName: String, folderName: String) {
-        // Create folder.
-        createFolderIfNeeded(folderName: folderName)
+    private init() {
+        createFolderIfNeeded()
+    }
+
+    func saveImage(image: UIImage, imageName: String) {
         guard let data = image.pngData(),
-              let url = getUrlForImage(imageName: imageName, folderName: folderName)
+              let url = getUrlForImage(imageName: imageName)
         else { return }
-        // Save image to path.
         do {
             try data.write(to: url)
         } catch let error {
@@ -28,18 +28,40 @@ class LocalFileManager {
         }
     }
 
-    func getImage(imageName: String, folderName: String) -> UIImage? {
-        guard let url = getUrlForImage(imageName: imageName, folderName: folderName),
+    func getImage(imageName: String) -> UIImage? {
+        guard let url = getUrlForImage(imageName: imageName),
               FileManager.default.fileExists(atPath: url.path) else {
             return nil
         }
         return UIImage(contentsOfFile: url.path)
     }
 
-    private func createFolderIfNeeded(folderName: String) {
-        guard let url = getUrlForFolder(folderName: folderName) else { return }
+    func saveName(name: String, fileName: String) {
+        guard let url = getUrlForFile(fileName: fileName) else { return }
+        do {
+            try name.write(to: url, atomically: true, encoding: .utf8)
+        } catch let error {
+            print("\(error.localizedDescription) \(fileName)")
+        }
+    }
 
-        if FileManager.default.fileExists(atPath: url.path) {
+    func getName(fileName: String) -> String? {
+        guard let url = getUrlForFile(fileName: fileName),
+              FileManager.default.fileExists(atPath: url.path) else {
+            return nil
+        }
+        do {
+            let name = try String(contentsOf: url, encoding: .utf8)
+            return name
+        } catch let error {
+            print("\(error.localizedDescription) \(fileName)")
+            return nil
+        }
+    }
+
+    private func createFolderIfNeeded() {
+        guard let url = getUrlForFolder() else { return }
+        if !FileManager.default.fileExists(atPath: url.path) {
             do {
                 try FileManager.default.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
             } catch let error {
@@ -48,17 +70,24 @@ class LocalFileManager {
         }
     }
 
-    private func getUrlForFolder(folderName: String) -> URL? {
+    private func getUrlForFolder() -> URL? {
         guard let url = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first else {
             return nil
         }
         return url.appendingPathComponent(folderName)
     }
 
-    private func getUrlForImage(imageName: String, folderName: String) -> URL? {
-        guard let folderURL = getUrlForFolder(folderName: folderName) else {
+    private func getUrlForImage(imageName: String) -> URL? {
+        guard let folderURL = getUrlForFolder() else {
             return nil
         }
         return folderURL.appendingPathComponent(imageName + ".png")
+    }
+
+    private func getUrlForFile(fileName: String) -> URL? {
+        guard let folderURL = getUrlForFolder() else {
+            return nil
+        }
+        return folderURL.appendingPathComponent(fileName)
     }
 }
