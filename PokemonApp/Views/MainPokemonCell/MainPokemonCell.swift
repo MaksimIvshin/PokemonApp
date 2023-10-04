@@ -88,7 +88,7 @@ class MainPokemonCell: UITableViewCell {
 
     func setupCell(viewModel: PokemonTableCellViewModel) {
         self.nameLabel.text = viewModel.title.capitalized
-        viewModel.loadImage { [weak self] image in
+        viewModel.loadImage { [weak self] image, name  in
             DispatchQueue.main.async {
                 self?.imageViewForCell.image = image
             }
