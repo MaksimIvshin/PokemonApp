@@ -56,7 +56,7 @@ class DetailsPokemonViewController: UIViewController {
         addViews()
         setupConstraints()
         configView ()
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
     }
 
     private func configView () {

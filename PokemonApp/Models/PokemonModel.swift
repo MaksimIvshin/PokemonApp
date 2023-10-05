@@ -15,6 +15,7 @@ struct Pokemon: Codable {
     let url: String
 }
 struct PokemonSelected: Codable {
+    let id: Int
     let name: String
     let sprites: PokemonSpites
     let height: Int

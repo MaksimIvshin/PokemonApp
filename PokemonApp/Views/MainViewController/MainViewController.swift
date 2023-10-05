@@ -30,12 +30,8 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         bindViewModel()
-        configView()
-        viewModel.getData()
-    }
-    
-    func configView() {
         setupTableView()
+        viewModel.getData()
     }
 
     func bindViewModel() {
@@ -72,6 +68,7 @@ class MainViewController: UIViewController {
     func presentView(pokemon: PokemonSelected) {
         let detail = DetailsPokemonViewModel(detailPokemon: pokemon)
         let detailViewController = DetailsPokemonViewController(viewModel: detail)
+        detail.loadSavedData()
         navigationController?.pushViewController(detailViewController, animated: true)
     }
 }
