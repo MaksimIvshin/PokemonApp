@@ -6,11 +6,10 @@
 //
 
 import Foundation
+// Store for constant values.
 class NetworkingConstant {
     public static var shared: NetworkingConstant = NetworkingConstant()
-
     private init () {}
-
     public var serverAdress: String {
         get {
             return "https://pokeapi.co/api/v2/pokemon/"

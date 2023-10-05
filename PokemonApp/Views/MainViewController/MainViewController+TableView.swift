@@ -5,47 +5,45 @@
 //  Created by Maks Ivshin on 30.09.23.
 //
 
-import Foundation
 import UIKit
 
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
-
+    // Some configuration.
     func setupTableView() {
-        self.registerCells()
-        self.tableView.delegate = self
-        self.tableView.dataSource = self
-        self.tableView.backgroundColor = .clear
-        self.tableView.separatorStyle = .none
-        self.view.backgroundColor = .systemBackground
-        self.view.addSubview(tableView)
-        self.title = "Pokemons"
-        self.view.addSubview(activityIndicator)
-        self.setupConstraints()
+        registerCells()
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.backgroundColor = .clear
+        tableView.separatorStyle = .none
+        view.backgroundColor = .systemBackground
+        view.addSubview(tableView)
+        title = "Pokemons"
+        view.addSubview(activityIndicator)
+        setupConstraints()
     }
-
-    func setupConstraints() {
+    // Positioning and layout constraints for the UI elements.
+    private func setupConstraints() {
         NSLayoutConstraint.activate([
             activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)])
-        NSLayoutConstraint.activate([
+            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)])
     }
-
+    // Register MainPokemonCell.
     func registerCells() {
         tableView.register(MainPokemonCell.self, forCellReuseIdentifier: MainPokemonCell.indetifier)
     }
-
+    // Returns the number of sections in the table view.
     func numberOfSections(in tableView: UITableView) -> Int {
         viewModel.numberOfSection()
     }
-
+    // Returns the number of rows in a specific section of the table view.
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         viewModel.numberOfRows(in: section)
     }
-
+    // Configures and returns a cell for a specific index path in the table view.
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier:
         MainPokemonCell.indetifier, for: indexPath) as? MainPokemonCell else {
@@ -56,19 +54,20 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         cell.selectionStyle = .none
         return cell
     }
-
+    // Reloads the table view.
     func reloadTableView(){
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
+        tableView.reloadData()
     }
-
+    // Returns the desired height for a cell at a specific index path.
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         70
     }
-
+    // Handles the selection of a row in the table view.
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         viewModel.getDetailData(for: indexPath.row)
     }
-
+    //  Save some data when a cell is no longer displayed.
+    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cellDataSourse.first?.saveTitle()
+    }
 }

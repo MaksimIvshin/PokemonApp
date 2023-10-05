@@ -7,11 +7,13 @@
 
 import Foundation
 
+// Cases for possible error.
 enum NetworkError: Error {
     case urlError
     case canNotParseData
+    case noInternetConnection
 }
-
+// Class for making API request
 public class APICaller {
     static func getPokemons(compltitionHandler: @escaping (_ result: Result<PokemonPage, NetworkError>) -> Void) {
         let urlString = NetworkingConstant.shared.serverAdress
@@ -20,17 +22,19 @@ public class APICaller {
             return
         }
         URLSession.shared.dataTask(with: url) { dataResponse, urlResponse, error in
-            if error == nil,
-               let data = dataResponse,
-               let resultData = try? JSONDecoder().decode(PokemonPage.self, from: data) {
-                compltitionHandler(.success(resultData))
-
-            } else {
-                compltitionHandler(.failure(.canNotParseData))
+            if let error = error as NSError?, error.domain == NSURLErrorDomain && error.code == NSURLErrorNotConnectedToInternet {
+                compltitionHandler(.failure(.noInternetConnection))
+                return
+            }
+            if error == nil, let data = dataResponse {
+                if let resultData = try? JSONDecoder().decode(PokemonPage.self, from: data) {
+                    compltitionHandler(.success(resultData))
+                } else {
+                    compltitionHandler(.failure(.canNotParseData))
+                }
             }
         }.resume()
     }
-
     static func getDetailPokemon(url: String, compltitionHandler: @escaping (_ result: Result<PokemonSelected, NetworkError>) -> Void) {
         let urlString = url
         guard let url = URL(string: urlString) else {
@@ -38,13 +42,16 @@ public class APICaller {
             return
         }
         URLSession.shared.dataTask(with: url) { dataResponse, urlResponse, error in
-            if error == nil,
-               let data = dataResponse,
-               let resultData = try? JSONDecoder().decode(PokemonSelected.self, from: data) {
-                compltitionHandler(.success(resultData))
-
-            } else {
-                compltitionHandler(.failure(.canNotParseData))
+            if let error = error as NSError?, error.domain == NSURLErrorDomain && error.code == NSURLErrorNotConnectedToInternet {
+                compltitionHandler(.failure(.noInternetConnection))
+                return
+            }
+            if error == nil, let data = dataResponse {
+                if let resultData = try? JSONDecoder().decode(PokemonSelected.self, from: data) {
+                    compltitionHandler(.success(resultData))
+                } else {
+                    compltitionHandler(.failure(.canNotParseData))
+                }
             }
         }.resume()
     }

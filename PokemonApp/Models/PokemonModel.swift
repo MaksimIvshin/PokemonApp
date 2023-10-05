@@ -6,34 +6,28 @@
 //
 
 import Foundation
-
+// Model for parsing data.
 struct PokemonPage: Codable {
     let results: [Pokemon]
 }
-
 struct Pokemon: Codable {
     let name: String
     let url: String
 }
-
 struct PokemonSelected: Codable {
     let id: Int
+    let name: String
     let sprites: PokemonSpites
     let height: Int
     let weight: Int
     let types: [TypeElement]
 }
-
 struct TypeElement: Codable {
-    let slot: Int
     let type: Species
 }
-
 struct Species: Codable {
     let name: String
-    let url: String
 }
-
 struct PokemonSpites: Codable {
     let front_default: String?
 }
