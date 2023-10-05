@@ -2,6 +2,7 @@
 
 PokemonApp - find your favorite pokemon!
 PokemonApp using  API (https://pokeapi.co/api/v2/pokemon/)
+Support offline mode.
 
 ## Technology stack
 UIKit, MVVM, API, JSON, FileManager.
