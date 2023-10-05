@@ -20,4 +20,9 @@ class NetworkingConstant {
             return "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"
         }
     }
+    public var serverAdressForMorePokemons: String {
+        get {
+            return "https://pokeapi.co/api/v2/pokemon/?offset=0&limit=10275"
+        }
+    }
 }
