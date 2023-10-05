@@ -6,80 +6,66 @@
 //  Created by Maks Ivshin on 4.10.23.
 //
 
-import Foundation
 import UIKit
 
-class FileManagerWrapper {
+class LocalFileManager {
+    // Properties.
     let fileManager = FileManager.default
     let documentsDirectory: URL
-
+    // Initialization.
     init() {
         documentsDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
     }
-
+    // Save an image to the document directory.
     func saveImage(from url: URL, withName name: String) {
         let destinationURL = documentsDirectory.appendingPathComponent(name)
-
-        // Скачивание данных изображения по URL
         if let imageData = try? Data(contentsOf: url) {
-            // Сохранение данных в файл
             do {
                 try imageData.write(to: destinationURL)
-                //print("Изображение успешно сохранено по пути: \(destinationURL.path)")
             } catch {
-               // print("Ошибка при сохранении изображения: \(error.localizedDescription)")
+                print(error.localizedDescription)
             }
         } else {
-            //print("Не удалось загрузить данные изображения по URL: \(url)")
+            print("Can't download URL: \(url)")
         }
     }
-
+    // Save a string to the document directory.
     func saveString(_ string: String, withName name: String) {
         let stringFilePath = documentsDirectory.appendingPathComponent(name)
-
         do {
             try string.write(to: stringFilePath, atomically: true, encoding: .utf8)
-            print("Строка успешно сохранена по пути: \(stringFilePath.path)")
         } catch {
-            print("Ошибка при сохранении строки: \(error.localizedDescription)")
+            print(error.localizedDescription)
         }
     }
-
+    // Load an image from the document directory.
     func getImage(named name: String) -> UIImage? {
         let fileURL = documentsDirectory.appendingPathComponent(name)
         if let imageData = try? Data(contentsOf: fileURL),
            let image = UIImage(data: imageData) {
-            print(image)
             return image
         }
         return nil
     }
-
+    // Load a string from the document directory.
     func getString(named name: String) -> String? {
         let fileURL = documentsDirectory.appendingPathComponent(name)
         if let stringData = try? String(contentsOf: fileURL, encoding: .utf8) {
-           //print(stringData)
             return stringData
         }
         return nil
     }
-
-    func fileExists(atPath path: String) -> Bool {
-        return fileManager.fileExists(atPath: path)
-    }
-
+    // Save an integer to the document directory.
     func saveInteger(_ integer: Int, withName name: String) {
         let integerData = Data("\(integer)".utf8)
         let integerFilePath = documentsDirectory.appendingPathComponent(name)
-
         do {
             try integerData.write(to: integerFilePath)
-         //   print("Целое число успешно сохранено по пути: \(integerFilePath.path)")
         } catch {
-          //  print("Ошибка при сохранении целого числа: \(error.localizedDescription)")
+            print(error.localizedDescription)
         }
     }
-
+    // Retrieve an integer from the document directory.
     func getInteger(named name: String) -> Int? {
         let integerFilePath = documentsDirectory.appendingPathComponent(name)
 
@@ -89,11 +75,8 @@ class FileManagerWrapper {
                 return integerValue
             }
         } catch {
-          //  print("Ошибка при получении целого числа: \(error.localizedDescription)")
+            print(error.localizedDescription)
         }
         return nil
     }
-
-
 }
-

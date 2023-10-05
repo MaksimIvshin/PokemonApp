@@ -8,38 +8,33 @@
 import UIKit
 
 class DetailsPokemonViewController: UIViewController {
-
-   private lazy var imageViewForPokemon: UIImageView = {
+    // Creating UI elements.
+    private lazy var imageViewForPokemon: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
-
     private lazy var pokemonName: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-
     private lazy var pokemonHeight: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-
     private lazy var pokemonType: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-
     private lazy var pokemonWeight: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-
-    //viewModel
+    // ViewModel.
     private var detailsViewModel: DetailsPokemonViewModel
 
     init(viewModel: DetailsPokemonViewModel) {
@@ -58,7 +53,7 @@ class DetailsPokemonViewController: UIViewController {
         configView ()
         view.backgroundColor = .systemBackground
     }
-
+    // Some configuration.
     private func configView () {
         self.title = "Pokemon details"
         pokemonName.text = detailsViewModel.pokemonName.capitalized
@@ -71,7 +66,7 @@ class DetailsPokemonViewController: UIViewController {
             }
         }
     }
-
+    // Add views to the DetailsPokemonViewController.
     private func addViews() {
         view.addSubview(imageViewForPokemon)
         view.addSubview(pokemonHeight)
@@ -82,6 +77,7 @@ class DetailsPokemonViewController: UIViewController {
 }
 
 extension DetailsPokemonViewController {
+    // Positioning and layout constraints for the UI elements.
     private func setupConstraints() {
         NSLayoutConstraint.activate([
             pokemonName.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 100),

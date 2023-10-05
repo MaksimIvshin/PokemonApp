@@ -8,23 +8,22 @@
 import Foundation
 
 class MainViewModel {
-
+    //Properties
     var isLoanding: Observable<Bool> = Observable(false)
     var isLoandingDetails: Observable<Bool> = Observable(false)
     var isDetailsLoaded: Observable<Bool> = Observable(false)
     var cellDataSourse: Observable<[PokemonTableCellViewModel]> = Observable(nil)
     var dataSource: PokemonPage?
     var detailPokemon: PokemonSelected?
-    var details: DetailsPokemonViewModel?
-
+    // Return the number of sections in the table view.
     func numberOfSection() -> Int {
         1
     }
-
+    // Return the number of rows in the given section.
     func numberOfRows(in section: Int) -> Int {
         self.dataSource?.results.count ?? 0
     }
-
+    // Fetch Pokemon data from the API.
     func getData() {
             if isLoanding.value ?? true { return }
             isLoanding.value = true
@@ -39,7 +38,7 @@ class MainViewModel {
                 }
             }
         }
-
+    // Fetch detailed Pokemon data for the given index from the API.
     func getDetailData(for index: Int) {
         if isLoandingDetails.value ?? true { return }
         self.isDetailsLoaded.value = false
@@ -55,7 +54,7 @@ class MainViewModel {
             }
         }
     }
-
+    // Map the fetched Pokemon data to cell view models.
     func mapCellData() {
         self.cellDataSourse.value = self.dataSource?.results.compactMap({ PokemonTableCellViewModel(pokemon: $0)
         })
