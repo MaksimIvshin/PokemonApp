@@ -55,11 +55,11 @@ class DetailsPokemonViewController: UIViewController {
     }
     // Some configuration.
     private func configView () {
-        self.title = "Pokemon details"
-        pokemonName.text = detailsViewModel.pokemonName.capitalized
-        pokemonHeight.text = "\(detailsViewModel.pokemonHeight.decimeterToCentimeter())"
-        pokemonWeight.text = "\(detailsViewModel.pokemonWeight.hectogramToKilogram())"
-        pokemonType.text = "\(detailsViewModel.pokemonType.capitalized) type"
+        self.title = "pokemonDetails".localized
+        pokemonName.text = "pokemonsName".localized + ": " + "\(detailsViewModel.pokemonName.capitalized)"
+        pokemonHeight.text = "pokemonsHeight".localized + ": " + "\(detailsViewModel.pokemonHeight.decimeterToCentimeter() + " " + "pokemonsCm".localized)"
+        pokemonWeight.text = "pokemonsWeight".localized + ": " + "\(detailsViewModel.pokemonWeight.hectogramToKilogram() + " " + "pokemonsKg".localized)"
+        pokemonType.text = "pokemonsType".localized + ": " + "\(detailsViewModel.pokemonType.capitalized)"
         detailsViewModel.loadImage { [weak self] image in
             DispatchQueue.main.async {
                 self?.imageViewForPokemon.image = image
