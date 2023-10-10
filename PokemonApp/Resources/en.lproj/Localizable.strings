@@ -1,0 +1,17 @@
+/* 
+  Localizable.strings
+  PokemonApp
+
+  Created by Maks Ivshin on 10.10.23.
+  
+*/
+
+"pokemonsMain" = "Pokemons";
+"pokemonDetails" = "Pokemon details";
+"pokemonsName" = "Name";
+"pokemonsHeight" = "Height";
+"pokemonsWeight" = "Weight";
+"pokemonsType" = "Type";
+"pokemonsCm" = "cm";
+"pokemonsKg" = "kg";
+

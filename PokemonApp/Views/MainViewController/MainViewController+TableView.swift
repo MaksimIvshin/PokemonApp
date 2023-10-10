@@ -17,7 +17,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         tableView.separatorStyle = .none
         view.backgroundColor = .systemBackground
         view.addSubview(tableView)
-        title = "Pokemons"
+        title = "pokemonsMain".localized
         view.addSubview(activityIndicator)
         setupConstraints()
     }
