@@ -7,19 +7,19 @@
 
 import Foundation
 import UIKit
-
-class DetailsPokemonViewModel {
+// MARK: - DetailsPokemonViewModel.
+final class DetailsPokemonViewModel {
     // Properties.
-    var detailPokemon: PokemonSelected
-    var pokemonImage: URL?
+    private var detailPokemon: PokemonSelected
+    private var pokemonImage: URL?
     var pokemonHeight: Int
     var pokemonName: String
     var pokemonWeight: Int
     var pokemonType: String
-    var id: Int
-    var image: UIImage?
+    private var id: Int
+    private var image: UIImage?
     // Local FileManager
-    var fileManager =  LocalFileManager()
+    private var fileManager =  LocalFileManager()
     // Initialization.
     init(detailPokemon: PokemonSelected) {
         self.detailPokemon = detailPokemon
@@ -31,21 +31,21 @@ class DetailsPokemonViewModel {
         self.pokemonImage = URL(string: detailPokemon.sprites.front_default ?? "")
         self.loadSavedData()
     }
-    // Create URL for the Pokemon image.
-    func makeImageURL() -> URL? {
+    // MARK: - Create URL for the Pokemon image.
+    private func makeImageURL() -> URL? {
         guard let imageURLString = detailPokemon.sprites.front_default else {
             return nil
         }
         return URL(string: imageURLString)
     }
-    // Save Pokemon data to the file system.
-    func saveData() {
+    // MARK: - Save Pokemon data to the file system.
+    private func saveData() {
         fileManager.saveString(pokemonName, withName: pokemonName)
         fileManager.saveInteger(pokemonHeight, withName: String(pokemonHeight))
         fileManager.saveInteger(pokemonWeight, withName: String(pokemonWeight))
         fileManager.saveString(pokemonType, withName: pokemonType)
     }
-    // Load previously saved Pokemon data from the file system.
+    // MARK: - Load previously saved Pokemon data from the file system.
     func loadSavedData() {
         if let savedName = fileManager.getString(named: pokemonName),
            let savedHeight = fileManager.getInteger(named: String(pokemonHeight)),
@@ -57,7 +57,7 @@ class DetailsPokemonViewModel {
             self.pokemonType = savedType
         }
     }
-    // Load the Pokemon image from the file system or fetch it from the network.
+    // MARK: - Load the Pokemon image from the filemanager or network.
     func loadImage(completion: ((UIImage?) -> Void)?) {
         if let savedImage = fileManager.getImage(named: String(id)) {
             self.image = savedImage

@@ -7,13 +7,13 @@
 
 import Foundation
 
-// Cases for possible error.
+// MARK: - Cases for possible error.
 enum NetworkError: Error {
     case urlError
     case canNotParseData
     case noInternetConnection
 }
-// Class for making API request
+// MARK: - Class for making API request.
 public class APICaller {
     static func getPokemons(compltitionHandler: @escaping (_ result: Result<PokemonPage, NetworkError>) -> Void) {
         let urlString = NetworkingConstant.shared.serverAdressForMorePokemons

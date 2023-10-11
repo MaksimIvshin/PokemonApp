@@ -7,24 +7,24 @@
 
 import Foundation
 import UIKit
-
-class PokemonTableCellViewModel {
+// MARK: - PokemonTableCellViewModel.
+final class PokemonTableCellViewModel {
     // Properties
     var title: String
     // Local FileManager
-    let fileManager = LocalFileManager()
+    private let fileManager = LocalFileManager()
     // Initialization.
     init(pokemon: Pokemon) {
         self.title = pokemon.name
         self.loadTitle()
     }
-    // Load previously saved Pokemon data from the file system.
-    func loadTitle() {
+    // MARK: - Load previously saved Pokemon data from the file system.
+    private func loadTitle() {
         if let savedTitle = fileManager.getString(named: title) {
             self.title = savedTitle
         }
     }
-    // Save Pokemon data to the file system.
+    // MARK: - Save Pokemon data to the file system.
     func saveTitle() {
         fileManager.saveString(title, withName: title)
     }

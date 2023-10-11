@@ -6,8 +6,8 @@
 //
 
 import Foundation
-// The observable generic class for tracking changes to value of T type.
-class Observable<T> {
+// MARK: - The observable generic class for tracking changes to value of T type.
+final class Observable<T> {
     private var listener: ((T?) -> Void)?
     var value: T? {
         didSet {

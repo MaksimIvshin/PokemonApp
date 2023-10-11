@@ -6,8 +6,8 @@
 //
 
 import Foundation
-// Store for constant values.
-class NetworkingConstant {
+// MARK: - Store for constant values.
+final class NetworkingConstant {
     public static var shared: NetworkingConstant = NetworkingConstant()
     private init () {}
     public var serverAdress: String {

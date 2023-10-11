@@ -6,46 +6,25 @@
 //
 
 import UIKit
-
-class DetailsPokemonViewController: UIViewController {
+// MARK: - DetailsPokemonViewController.
+final class DetailsPokemonViewController: UIViewController {
     // Creating UI elements.
-    private lazy var imageViewForPokemon: UIImageView = {
-        let imageView = UIImageView()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
-    }()
-    private lazy var pokemonName: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    private lazy var pokemonHeight: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    private lazy var pokemonType: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    private lazy var pokemonWeight: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    // ViewModel.
+    private lazy var imageViewForPokemon = UIImageView()
+    private lazy var pokemonName = UILabel()
+    private lazy var pokemonHeight = UILabel()
+    private lazy var pokemonType = UILabel()
+    private lazy var pokemonWeight = UILabel()
+    // MARK: - Model in DetailsPokemonViewController.
     private var detailsViewModel: DetailsPokemonViewModel
-
+    // Initiliztion.
     init(viewModel: DetailsPokemonViewModel) {
         self.detailsViewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
-
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    // View life cicle.
     override func viewDidLoad() {
         super.viewDidLoad()
         addViews()
@@ -66,18 +45,17 @@ class DetailsPokemonViewController: UIViewController {
             }
         }
     }
-    // Add views to the DetailsPokemonViewController.
+    // MARK: - Add views to the DetailsPokemonViewController.
     private func addViews() {
-        view.addSubview(imageViewForPokemon)
-        view.addSubview(pokemonHeight)
-        view.addSubview(pokemonWeight)
-        view.addSubview(pokemonType)
-        view.addSubview(pokemonName)
+        let views = [imageViewForPokemon, pokemonName, pokemonHeight, pokemonType, pokemonWeight]
+        views.forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
+        views.forEach {
+            view.addSubview($0)
+        }
     }
 }
-
+// MARK: - Positioning and layout constraints for the UI elements.
 extension DetailsPokemonViewController {
-    // Positioning and layout constraints for the UI elements.
     private func setupConstraints() {
         NSLayoutConstraint.activate([
             pokemonName.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 100),
