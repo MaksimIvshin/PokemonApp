@@ -16,7 +16,7 @@ enum NetworkError: Error {
 // MARK: - Class for making API request.
 public class APICaller {
     static func getPokemons(compltitionHandler: @escaping (_ result: Result<PokemonPage, NetworkError>) -> Void) {
-        let urlString = NetworkingConstant.shared.serverAdressForMorePokemons
+        let urlString = NetworkingURL.shared.serverAddressForMorePokemons.string ?? ""
         guard let url = URL(string: urlString) else {
             compltitionHandler(.failure(.urlError))
             return
