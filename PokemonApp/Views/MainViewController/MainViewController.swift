@@ -6,8 +6,8 @@
 //
 
 import UIKit
-
-class MainViewController: UIViewController {
+// MARK: - MainViewController.
+final class MainViewController: UIViewController {
     // Creating UI elements.
     lazy var tableView: UITableView = {
         let table = UITableView()
@@ -22,7 +22,7 @@ class MainViewController: UIViewController {
         activity.hidesWhenStopped = true
         return activity
     }()
-    // Models.
+    // MARK: - Models in MainViewController.
     var viewModel: MainViewModel = MainViewModel()
     var cellDataSourse: [PokemonTableCellViewModel] = []
     // View life cicle.
@@ -32,8 +32,8 @@ class MainViewController: UIViewController {
         setupTableView()
         viewModel.getData()
     }
-    // ViewModel binding.
-    func bindViewModel() {
+    // MARK: - Binding ViewModel of the MainViewController .
+    private func bindViewModel() {
         viewModel.isDetailsLoaded.bind { [weak self] isLoaded in
             guard let self = self, let isLoaded = isLoaded, isLoaded else {
                 return
@@ -61,8 +61,8 @@ class MainViewController: UIViewController {
             self.reloadTableView()
         }
     }
-    // Presenting DetailViewController.
-    func presentView(pokemon: PokemonSelected) {
+    //MARK: - Presenting DetailsViewController.
+    private func presentView(pokemon: PokemonSelected) {
         let detail = DetailsPokemonViewModel(detailPokemon: pokemon)
         let detailViewController = DetailsPokemonViewController(viewModel: detail)
         detail.loadSavedData()

@@ -6,7 +6,7 @@
 //
 
 import Foundation
-// Model for parsing data.
+// MARK: - Model for parsing data.
 struct PokemonPage: Codable {
     let results: [Pokemon]
 }

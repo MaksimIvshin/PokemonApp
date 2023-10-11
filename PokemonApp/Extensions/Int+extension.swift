@@ -6,14 +6,14 @@
 //
 
 import Foundation
-// Hectogram to kilogram.
+// MARK: - Hectogram to kilogram.
 extension Int {
     func hectogramToKilogram() -> String {
         let kilograms = Double(self) / 10.0
         return "\(kilograms)"
     }
 }
-// Decimeter to centimeter.
+// MARK: - Decimeter to centimeter.
 extension Int {
     func decimeterToCentimeter() -> String {
         let centimeters = self * 10

@@ -5,8 +5,8 @@
 //  Created by Maks Ivshin on 30.09.23.
 //
 import UIKit
-
-class MainPokemonCell: UITableViewCell {
+// MARK: - MainPokemonCell.
+final class MainPokemonCell: UITableViewCell {
     // Constant for the MainPokemonCell.
     public static var indetifier: String {
         get{
@@ -14,12 +14,12 @@ class MainPokemonCell: UITableViewCell {
         }
     }
     // Creating UI elements.
-    lazy var containerView: UIView = {
+    private lazy var containerView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-    lazy var nameLabel: UILabel = {
+    private lazy var nameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -32,12 +32,12 @@ class MainPokemonCell: UITableViewCell {
         setupCell()
     }
     // Add views to the MainPokemonCell.
-    func addViews() {
+    private func addViews() {
         containerView.addSubview(nameLabel)
         contentView.addSubview(containerView)
     }
     // Some configuration.
-    func setupCell() {
+    private func setupCell() {
         containerView.layer.cornerRadius = 10
         containerView.layer.masksToBounds = true
         containerView.layer.borderWidth = 1
@@ -50,10 +50,9 @@ class MainPokemonCell: UITableViewCell {
         self.nameLabel.text = viewModel.title.capitalized
     }
 }
-
+// MARK: - Setup constraints for MainPokemonCell.
 extension MainPokemonCell {
-    // Positioning and layout constraints for the UI elements
-    func setupConstraints() {
+    private func setupConstraints() {
         let margin: CGFloat = 10
         NSLayoutConstraint.activate([
             containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: margin),

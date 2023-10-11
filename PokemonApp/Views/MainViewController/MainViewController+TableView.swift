@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+// MARK: - Setup tableView in MainViewController.
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     // Some configuration.
     func setupTableView() {
@@ -32,7 +32,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)])
     }
     // Register MainPokemonCell.
-    func registerCells() {
+    private func registerCells() {
         tableView.register(MainPokemonCell.self, forCellReuseIdentifier: MainPokemonCell.indetifier)
     }
     // Returns the number of sections in the table view.

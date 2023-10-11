@@ -5,7 +5,7 @@
   Created by Maks Ivshin on 10.10.23.
   
 */
-
+// MARK: - Localization of the app.
 "pokemonsMain" = "Pokemons";
 "pokemonDetails" = "Pokemon details";
 "pokemonsName" = "Name";

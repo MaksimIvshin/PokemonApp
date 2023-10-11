@@ -7,15 +7,20 @@
 //
 
 import UIKit
-
-class LocalFileManager {
-    // Properties.
-    let fileManager = FileManager.default
-    let documentsDirectory: URL
+// MARK: - LocalFileManager
+final class LocalFileManager {
+    // MARK: - Properties.
+    private let fileManager = FileManager.default
+    private let documentsDirectory: URL
     // Initialization.
     init() {
-        documentsDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!
+        if let documentsDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first {
+            self.documentsDirectory = documentsDirectory
+        } else {
+            self.documentsDirectory = URL(fileURLWithPath: "")
+        }
     }
+    // MARK: - Several main func. of the LocalFileManager.
     // Save an image to the document directory.
     func saveImage(from url: URL, withName name: String) {
         let destinationURL = documentsDirectory.appendingPathComponent(name)
@@ -23,10 +28,10 @@ class LocalFileManager {
             do {
                 try imageData.write(to: destinationURL)
             } catch {
-                print(error.localizedDescription)
+                debugPrint(error)
             }
         } else {
-            print("Can't download URL: \(url)")
+            debugPrint("Can't download URL: \(url)")
         }
     }
     // Save a string to the document directory.
@@ -35,7 +40,7 @@ class LocalFileManager {
         do {
             try string.write(to: stringFilePath, atomically: true, encoding: .utf8)
         } catch {
-            print(error.localizedDescription)
+            debugPrint(error)
         }
     }
     // Load an image from the document directory.
@@ -62,7 +67,7 @@ class LocalFileManager {
         do {
             try integerData.write(to: integerFilePath)
         } catch {
-            print(error.localizedDescription)
+            debugPrint(error)
         }
     }
     // Retrieve an integer from the document directory.
@@ -75,7 +80,7 @@ class LocalFileManager {
                 return integerValue
             }
         } catch {
-            print(error.localizedDescription)
+            debugPrint(error)
         }
         return nil
     }
