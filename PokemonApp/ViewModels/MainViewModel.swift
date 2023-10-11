@@ -43,7 +43,7 @@ final class MainViewModel {
         if isLoandingDetails.value ?? true { return }
         self.isDetailsLoaded.value = false
         isLoandingDetails.value = true
-        APICaller.getDetailPokemon(url: "\(NetworkingConstant.shared.serverAdress)\(index + 1)/") { [weak self] result in
+        APICaller.getDetailPokemon(url: "\(NetworkingURL.shared.serverAddress)\(index + 1)/") { [weak self] result in
             self?.isLoandingDetails.value = false
             switch result {
             case .success(let data):
