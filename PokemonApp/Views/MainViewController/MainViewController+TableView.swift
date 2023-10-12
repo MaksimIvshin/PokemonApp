@@ -7,7 +7,7 @@
 
 import UIKit
 // MARK: - Setup tableView in MainViewController.
-extension MainViewController: UITableViewDelegate, UITableViewDataSource {
+extension MainViewController: UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
     // Some configuration.
     func setupTableView() {
         registerCells()
@@ -69,5 +69,12 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     //  Save some data when a cell is no longer displayed.
     func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cellDataSourse.first?.saveTitle()
+    }
+    // When the user scrolls the content view data will update in the tableview.
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let position = scrollView.contentOffset.y
+        if position > (tableView.contentSize.height - 100 - scrollView.frame.size.height) {
+            self.viewModel.getData()
+        }
     }
 }

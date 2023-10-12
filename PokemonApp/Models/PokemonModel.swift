@@ -8,6 +8,9 @@
 import Foundation
 // MARK: - Model for parsing data.
 struct PokemonPage: Codable {
+    var results: [Pokemon]
+}
+struct PokemonPage2: Codable {
     let results: [Pokemon]
 }
 struct Pokemon: Codable {

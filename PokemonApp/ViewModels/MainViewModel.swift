@@ -27,14 +27,23 @@ final class MainViewModel {
     func getData() {
         if isLoanding.value ?? true { return }
         isLoanding.value = true
-        APICaller.getPokemons { [weak self] result in
-            self?.isLoanding.value = false
-            switch result {
-            case .success(let data):
-                self?.dataSource = data
-                self?.mapCellData()
-            case .failure(let error):
-                debugPrint(error)
+        let page = self.dataSource?.results.count ?? 0
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            APICaller.getPokemons(page: page) { [weak self] result in
+                self?.isLoanding.value = false
+                switch result {
+                case .success(let data):
+                    if let existingData = self?.dataSource {
+                        var updatedData = existingData
+                        updatedData.results.append(contentsOf: data.results)
+                        self?.dataSource = updatedData
+                    } else {
+                        self?.dataSource = data
+                    }
+                    self?.mapCellData()
+                case .failure(let error):
+                    debugPrint(error)
+                }
             }
         }
     }
