@@ -40,7 +40,7 @@ final class NetworkingURL: NetworkingURLProtocol {
         components.path = "/api/v2/pokemon/"
         components.queryItems = [
             URLQueryItem(name: "offset", value: "0"),
-            URLQueryItem(name: "limit", value: "10275")
+            URLQueryItem(name: "limit", value: "1000")
         ]
         return components
     }
